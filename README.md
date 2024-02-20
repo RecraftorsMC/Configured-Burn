@@ -29,6 +29,20 @@ Structure:
 }
 ```
 
+## Reference
+
+Here is a small reference sheet of some vanilla item fuel times,
+so that you may have an idea of what a value evaluates for:
+
+| item                         | value (ticks) | time (seconds) | number of items |
+|------------------------------|---------------|----------------|-----------------|
+| `#minecraft:boats`           | 1200          | 60             | 6               |
+| `#minecraft:burnable_planks` | 300           | 15             | 1.5             |
+| `minecraft:coal_block`       | 16000         | 800            | 80              |
+| `minecraft:coal`             | 1600          | 80             | 8               |
+| `minecraft:lava_bucket`      | 20000         | 1000           | 100             |
+| `#minecraft:burnable_logs`   | 300           | 15             | 1.5             |
+
 ## Implemented mod compatibilities
 
 ### Create
