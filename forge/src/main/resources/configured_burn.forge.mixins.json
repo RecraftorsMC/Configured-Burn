@@ -5,6 +5,7 @@
   "plugin": "mc.recraftors.configured_burn.mixin.compat.Plugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ForgeEventFactoryMixin",
     "compat.create.present.BlazeBurnerBlockEntityMixin"
   ],
   "client": [
