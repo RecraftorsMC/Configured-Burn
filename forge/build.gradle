@@ -28,10 +28,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modCompileOnly("com.simibubi.create:create-${rootProject.minecraft_version}:${rootProject.create_forge_version}:slim") {
-        exclude group: "top.theillusivec4.curios" // literally such a pain
-        exclude group: "org.squiddev" // not dealing with this
-    }
+    modCompileOnly("com.simibubi.create:create-${rootProject.minecraft_version}:${rootProject.create_forge_version}:slim") { transitive false }
 }
 
 processResources {
@@ -74,7 +71,7 @@ components.java {
 publishing {
     publications {
         mavenForge(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
+            artifactId = rootProject.mod_id + "-" + project.name
             from components.java
         }
     }
