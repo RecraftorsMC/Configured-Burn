@@ -134,7 +134,7 @@ public class BurnRecipe implements Recipe<Inventory> {
         private static Serializer instance;
         public static final Supplier<Serializer> SUPPLIER = () -> instance;
 
-        public static RecipeSerializer<?> init() {
+        public static RecipeSerializer<BurnRecipe> init() {
             if (instance == null) {
                 instance = new Serializer();
             }

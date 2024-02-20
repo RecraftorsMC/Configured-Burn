@@ -8,7 +8,7 @@ import java.util.Optional;
 public final class PreLaunchUtilsImpl {
 
     public static boolean isModLoaded(String modId) {
-        return FMLLoader.modLauncherModList().contains(modId);
+        return FMLLoader.modLauncherModList().stream().anyMatch(map -> map.containsKey(modId));
     }
 
     public static boolean modHasAuthor(String modId, String author) {
