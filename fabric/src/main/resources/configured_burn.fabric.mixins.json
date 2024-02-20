@@ -5,6 +5,8 @@
   "plugin": "mc.recraftors.configured_burn.mixin.compat.Plugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "RecipeSerializerMixin",
+    "RecipeTypeMixin",
     "compat.create.present.BlazeBurnerBlockEntityMixin",
     "compat.fabric_content_registries.present.FuelRegistryImplMixin"
   ],
