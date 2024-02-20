@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mc.recraftors.configured_burn.mixin",
+  "plugin": "mc.recraftors.configured_burn.mixin.compat.Plugin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "compat.create.present.BlazeBurnerBlockEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

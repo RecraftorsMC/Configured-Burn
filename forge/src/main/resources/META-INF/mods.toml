@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="GNU GPL 3.0"
+issueTrackerURL="https://github.com/RecraftorsMC/configured_burn/issues"
+[[mods]]
+modId="configured_burn"
+version="${version}"
+displayName="Configured Burn Time"
+displayURL="https://github.com/RecraftorsMC/configured_burn"
+logoFile="icon.png"
+authors="Recraftors Team"
+displayTest="IGNORE_SERVER_VERSION"
+description='''
+Configure the item fuel time 
+'''
+[[dependencies.configured_burn]] #optional
+   modId="forge" #mandatory
+   mandatory=true #mandatory
+   versionRange="[43,)" #mandatory
+   ordering="NONE"
+   side="BOTH"
+[[dependencies.configured_burn]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="[1.19.2,)"
+   ordering="NONE"
+   side="BOTH"

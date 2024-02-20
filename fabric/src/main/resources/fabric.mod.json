@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "configured_burn",
+  "version": "${version}",
+  "name": "Configured Burn Time",
+  "description": "Configure the items fuel time",
+  "authors": [
+    {
+      "name": "Recraftors Team",
+      "contact": {
+        "homepage": "https://github.com/RecraftorsMC"
+      }
+    },
+    {
+      "name": "Nerjal Nosk",
+      "contact": {
+        "homepage": "https://github.com/NerjalNosk"
+      }
+    }
+  ],
+  "contact": {},
+  "license": "GNU GPL 3.0",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "mc.recraftors.configured_burn.fabric.ConfiguredBurnTimeFabric"
+    ]
+  },
+  "mixins": [
+    "configured_burn.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "minecraft": ">=1.19.2"
+  }
+}
