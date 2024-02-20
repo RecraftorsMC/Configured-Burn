@@ -16,7 +16,7 @@ public interface RecipeTypeMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void burnRecipeTypeRegistar(CallbackInfo ci) {
-        Identifier id = ConfiguredBurnTime.modId("burning_time");
+        Identifier id = ConfiguredBurnTime.modId(BurnRecipe.KEY);
         BurnRecipe.init(Registry.register(Registry.RECIPE_TYPE, id, new RecipeType<BurnRecipe>() {
             @Override
             public String toString() {

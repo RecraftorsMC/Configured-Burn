@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 public class BurnRecipe implements Recipe<Inventory> {
     private static RecipeType<BurnRecipe> recipeType;
     public static final Supplier<RecipeType<BurnRecipe>> SUPPLIER = () -> recipeType;
+    public static final String KEY = "burning_time";
 
     public static void init(RecipeType<BurnRecipe> type) {
         if (recipeType == null) recipeType = type;
