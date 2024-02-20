@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public interface RecipeSerializerMixin {
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void burnRecipeSerializerRegistar(CallbackInfo ci) {
-        Registry.register(Registries.RECIPE_SERIALIZER, ConfiguredBurnTime.modId("burning_time"), BurnRecipe.Serializer.init());
+        Registry.register(Registries.RECIPE_SERIALIZER, ConfiguredBurnTime.modId(BurnRecipe.KEY), BurnRecipe.Serializer.init());
         PreLaunchUtils.LOGGER.info("Configured item burn time recipe serializer registered");
     }
 }
