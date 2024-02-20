@@ -6,12 +6,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -63,6 +65,16 @@ public class BurnRecipe implements Recipe<Inventory> {
     @Override
     public boolean matches(Inventory inventory, World world) {
         return false;
+    }
+
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        if (this.item == null) {
+            return DefaultedList.copyOf(Ingredient.fromTag(this.tag));
+        } else if (this.tag == null) {
+            return DefaultedList.copyOf(Ingredient.ofItems(this.item));
+        }
+        return DefaultedList.copyOf(Ingredient.ofItems(this.item), Ingredient.fromTag(this.tag));
     }
 
     @Override
