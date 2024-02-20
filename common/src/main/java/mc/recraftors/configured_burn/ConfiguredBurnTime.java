@@ -5,10 +5,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.RecipeManager;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntryList;
 
 import java.util.*;
 
@@ -120,8 +120,8 @@ public class ConfiguredBurnTime {
 		if (tag == null || item == null) {
 			return false;
 		}
-		Optional<RegistryEntryList.Named<Item>> o1 = Registry.ITEM.getEntryList(tag);
-        return o1.map(registryEntries -> registryEntries.contains(Registry.ITEM.createEntry(item))).orElse(false);
+		Optional<RegistryEntryList.Named<Item>> o1 = Registries.ITEM.getEntryList(tag);
+        return o1.map(registryEntries -> registryEntries.contains(Registries.ITEM.createEntry(item))).orElse(false);
     }
 
 	public record CustomFuelEntry(int time, short priority, Item item, TagKey<Item> tag,

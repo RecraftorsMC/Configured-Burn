@@ -9,10 +9,11 @@ import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.function.Supplier;
@@ -45,7 +46,7 @@ public class BurnRecipe implements Recipe<Inventory> {
     }
 
     void write(PacketByteBuf buf) {
-        Identifier i1 = this.item == null ? Registry.ITEM.getDefaultId() : Registry.ITEM.getId(this.item);
+        Identifier i1 = this.item == null ? Registries.ITEM.getDefaultId() : Registries.ITEM.getId(this.item);
         Identifier i2 = this.tag == null ? new Identifier("null") : this.tag.id();
         buf.writeIdentifier(i1);
         buf.writeIdentifier(i2);
@@ -65,8 +66,8 @@ public class BurnRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public ItemStack craft(Inventory inventory) {
-        return new ItemStack(Registry.ITEM.get(Registry.ITEM.getDefaultId()));
+    public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
+        return new ItemStack(Registries.ITEM.get(Registries.ITEM.getDefaultId()));
     }
 
     @Override
@@ -75,8 +76,8 @@ public class BurnRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public ItemStack getOutput() {
-        return new ItemStack(Registry.ITEM.get(Registry.ITEM.getDefaultId()));
+    public ItemStack getOutput(DynamicRegistryManager registryManager) {
+        return new ItemStack(Registries.ITEM.get(Registries.ITEM.getDefaultId()));
     }
 
     @Override
@@ -146,7 +147,7 @@ public class BurnRecipe implements Recipe<Inventory> {
             Item item = JsonHelper.getItem(json, "item");
             TagKey<Item> tag;
             if (!json.has("tag")) tag = null;
-            else tag = TagKey.of(Registry.ITEM.getKey(), Identifier.tryParse(JsonHelper.asString(json, "tag")));
+            else tag = TagKey.of(Registries.ITEM.getKey(), Identifier.tryParse(JsonHelper.asString(json, "tag")));
             short priority = JsonHelper.getShort(json, "priority", (short) 0);
             int time = JsonHelper.getInt(json, "time");
             CompatBurnTime compatModule = readCompatModule(json);
@@ -163,13 +164,13 @@ public class BurnRecipe implements Recipe<Inventory> {
         public BurnRecipe read(Identifier id, PacketByteBuf buf) {
             Identifier i1 = buf.readIdentifier();
             Identifier i2 = buf.readIdentifier();
-            Item item = Registry.ITEM.get(i1);
-            TagKey<Item> tag = (i2.equals(new Identifier("null"))) ? null : TagKey.of(Registry.ITEM.getKey(), i2);
+            Item item = Registries.ITEM.get(i1);
+            TagKey<Item> tag = (i2.equals(new Identifier("null"))) ? null : TagKey.of(Registries.ITEM.getKey(), i2);
             short priority = buf.readShort();
             int time = buf.readInt();
             CompatBurnTime compatModule = readCompatModule(buf);
             // conditions are deemed irrelevant on the client so not read
-            if (i1 == Registry.ITEM.getDefaultId() && tag == null) {
+            if (i1 == Registries.ITEM.getDefaultId() && tag == null) {
                 return null;
             }
             return new BurnRecipe(id, item, tag, priority, time, compatModule, new ItemPredicate[0]);
