@@ -1,18 +1,26 @@
 package mc.recraftors.configured_burn.forge;
 
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.loading.LoadingModList;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
+import java.util.List;
 import java.util.Optional;
 
 public final class PreLaunchUtilsImpl {
 
     public static boolean isModLoaded(String modId) {
-        return FMLLoader.modLauncherModList().stream().anyMatch(map -> map.containsKey(modId));
+        List<ModInfo> mods = LoadingModList.get().getMods();
+        for (ModInfo mod : mods) {
+            if (mod.getModId().equals(modId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean modHasAuthor(String modId, String author) {
-        Optional<?> opt = ModList.get().getModFileById(modId).getMods().get(0).getConfig().getConfigElement("authors");
+        Optional<?> opt = LoadingModList.get().getModFileById(modId).getMods().get(0).getConfig().getConfigElement("authors");;
         if (opt.isEmpty()) return false;
         String[] strings;
         Object o = opt.get();
