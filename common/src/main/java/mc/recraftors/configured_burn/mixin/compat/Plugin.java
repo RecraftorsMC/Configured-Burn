@@ -47,8 +47,9 @@ public final class Plugin implements IMixinConfigPlugin {
         }
         // Apply accordingly of the mod's presence, absence, etc
         if (mixinPath[i].equals(COMPAT_PRESENT_KEY)) {
-            PreLaunchUtils.LOGGER.info("[Configured Burn] Injecting compatibility {} for mod {}", mixinPath[mixinPath.length-1], compatModId);
-            return PreLaunchUtils.isModLoaded(compatModId);
+            boolean b = PreLaunchUtils.isModLoaded(compatModId);
+            if (b) PreLaunchUtils.LOGGER.info("[Configured Burn] Injecting compatibility {} for mod {}", mixinPath[mixinPath.length-1], compatModId);
+            return b;
         }
         else if (mixinPath[i].equals(COMPAT_ABSENT_KEY)) return !PreLaunchUtils.isModLoaded(compatModId);
         else return (mixinPath[i].equals(COMPAT_ANY_KEY));
