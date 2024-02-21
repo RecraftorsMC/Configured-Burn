@@ -48,3 +48,6 @@ so that you may have an idea of what a value evaluates for:
 ### Create
 
 The recipe supports a compatibility field which allows to define how long should an item make a Create blaze burner overheat.
+
+Warning! As per Create's implementation, any time a blaze burner finished overheating, ensues a time of normal heating that
+cannot be controlled to this day.
