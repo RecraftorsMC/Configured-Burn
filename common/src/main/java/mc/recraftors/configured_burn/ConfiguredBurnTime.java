@@ -38,7 +38,8 @@ public class ConfiguredBurnTime {
 			while (iterator.hasNext()) {
 				CustomFuelEntry e = iterator.next();
 				if (e.time < 0) continue;
-				if (e.item == entry.item || e.tag.id().equals(entry.tag.id()) || isItemInTag(e.tag, entry.item) || isItemInTag(entry.tag, e.item)) {
+				boolean b1 = e.tag != null && entry.tag != null && e.tag.id().equals(entry.tag.id());
+				if (e.item == entry.item || b1 || isItemInTag(e.tag, entry.item) || isItemInTag(entry.tag, e.item)) {
 					if (entry.priority > e.priority) iterator.remove();
 					else b = false;
 					break;
