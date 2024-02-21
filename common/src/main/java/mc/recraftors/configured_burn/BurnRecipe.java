@@ -108,7 +108,7 @@ public class BurnRecipe implements Recipe<Inventory> {
     }
 
     public static class CompatBurnTime {
-        public static final CompatBurnTime DEFAULT = new CompatBurnTime(0) {
+        public static final CompatBurnTime DEFAULT = new CompatBurnTime(-1) {
             @Override
             void write(PacketByteBuf buf) {
                 buf.writeByte(0);
@@ -141,6 +141,19 @@ public class BurnRecipe implements Recipe<Inventory> {
         public String toString() {
             return String.format("%s[createOverheatTime=%d]", this.getClass().getSimpleName(), this.createOverheatTime);
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof CompatBurnTime that)) return false;
+
+            return createOverheatTime == that.createOverheatTime;
+        }
+
+        @Override
+        public int hashCode() {
+            return createOverheatTime;
+        }
     }
 
     public static class Serializer implements RecipeSerializer<BurnRecipe> {
@@ -167,6 +180,7 @@ public class BurnRecipe implements Recipe<Inventory> {
             if (json.has("conditions")) conditions = ItemPredicate.deserializeAll(json.get("conditions"));
             else conditions = new ItemPredicate[0];
             if (item == null && tag == null) {
+                PreLaunchUtils.LOGGER.warn("Unable to load fuel time reconfiguration {}", id);
                 return null;
             }
             return new BurnRecipe(id, item, tag, priority, time, compatModule, conditions);
@@ -183,6 +197,7 @@ public class BurnRecipe implements Recipe<Inventory> {
             CompatBurnTime compatModule = readCompatModule(buf);
             // conditions are deemed irrelevant on the client so not read
             if (i1 == Registry.ITEM.getDefaultId() && tag == null) {
+                PreLaunchUtils.LOGGER.warn("Unable to parse fuel time reconfiguration {}", id);
                 return null;
             }
             return new BurnRecipe(id, item, tag, priority, time, compatModule, new ItemPredicate[0]);
