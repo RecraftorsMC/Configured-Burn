@@ -42,26 +42,6 @@ allprojects {
             name = "Devos Maven"
             url = "https://mvn.devos.one/snapshots/"
         }
-        maven {
-            name = "Jamies Maven"
-            url = "https://maven.jamieswhiteshirt.com/libs-release"
-        }
-        maven {
-            name = "Modrinth Maven"
-            url = "https://api.modrinth.com/maven"
-        }
-        maven {
-            name = "Curse Maven"
-            url = "https://cursemaven.com"
-        }
-        maven {
-            name = "Jitpack"
-            url = "https://jitpack.io/"
-        }
-        maven {
-            name = "Idk how to name this ngl"
-            url = "https://dvs1.progwml6.com/files/maven/"
-        }
     }
 
     tasks.withType(JavaCompile) {
