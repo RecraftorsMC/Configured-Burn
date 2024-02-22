@@ -18,7 +18,10 @@
       }
     }
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/RecraftorsMC/configured-burn",
+    "issues": "https://github.com/RecraftorsMC/configured-burn/issues"
+  },
   "license": "GNU GPL 3.0",
   "icon": "icon.png",
   "environment": "*",
