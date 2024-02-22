@@ -19,7 +19,7 @@ subprojects {
         mappings (loom.layered {
             it.mappings "net.fabricmc:yarn:${rootProject.minecraft_version}+build.${rootProject.yarn_build}:v2"
 
-            it.mappings rootProject.file("mappings/yarn-custom.tiny")
+            //it.mappings rootProject.file("mappings/yarn-custom.tiny")
         })
     }
 }
